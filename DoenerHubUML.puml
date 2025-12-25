@@ -1,0 +1,60 @@
+@startuml
+class DoenerHub {
+- JPanel hauptPanel
+- JComboBox<String> brotcomboBox1
+- JComboBox<String> fleischcomboBox2
+- JCheckBox rotkohlCheckBox
+- JCheckBox tomatenCheckBox
+- JCheckBox zwiebelnCheckBox
+- JTextArea bestellung
+- JButton bestellenButton
+- JButton abbrechenButton
+- JTextArea toogoogtogotextArea1
+- JCheckBox glutenfreiCheckBox
+- JButton filternButton
+- JTextField anzahltextField1
+- JCheckBox takeAwayCheckBox
+- DoenerOrder[] doenerOrders
+- void initObjekt()
+- int berechnePreis(DoenerOrder)
+- void handleBestellen()
+- void displayAllOrders()
+- void displayGlutenfreiOrders()
+- void resetFields()
++ {static} void main(String[])
+}
+
+
+enum DoenerPrice {
++  BASIC_PREIS
++  TOPPING_PREIS
+- int preis
++ int getPreis()
+}
+
+
+class DoenerOrder {
+- String fleisch
+- String brot
+- int anzahl
+- boolean glutenfrei
+- boolean tomaten
+- boolean rotkohl
+- boolean zwiebeln
+- boolean takeaway
++ String getFleisch()
++ String getBrot()
++ int getAnzahl()
++ boolean isGlutenfrei()
++ boolean isTomaten()
++ boolean isRotkohl()
++ boolean isZwiebeln()
++ boolean isTakeaway()
++ String getDetails()
+}
+
+
+
+
+JFrame <|-- DoenerHub
+@enduml
