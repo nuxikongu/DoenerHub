@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class DoenerHub extends JFrame {
@@ -18,8 +19,11 @@ public class DoenerHub extends JFrame {
     private JTextField anzahltextField1;
     private JCheckBox takeAwayCheckBox;
 
-    // Liste für TooGoodToGo-Bestellungen
-    private DoenerOrder[] doenerOrders = new DoenerOrder[3];
+    // Liste für TooGoodToGo-Bestellungen (genau 3 Objekte beim Start)
+    private ArrayList<DoenerOrder> bestellungen = new ArrayList<>();
+
+    // Kunden-Bestellungen: mehrere Bestellungen möglich (z.B. 2 unterschiedliche)
+    private ArrayList<DoenerOrder> kundenBestellungen = new ArrayList<>();
 
     public DoenerHub() {
         setTitle("DoenerHub");
@@ -42,8 +46,8 @@ public class DoenerHub extends JFrame {
     }
 
     /**
-     * Erstellt mindestens drei DoenerOrder-Objekte mit Zufallswerten
-     * und speichert sie in der Liste doenerOrders.
+     * Erstellt genau drei DoenerOrder-Objekte mit Zufallswerten
+     * und speichert sie in der ArrayList 'bestellungen'.
      * Wird beim Start des Programms aufgerufen.
      */
     private void initObjekt() {
@@ -52,8 +56,10 @@ public class DoenerHub extends JFrame {
         String[] fleisch = {"Lamm", "Hähnchen", "Kalb"};
         String[] brot = {"Fladenbrot", "Yufka", "Teller", "Döner Box"};
 
-        for (int i = 0; i < doenerOrders.length; i++) {
-            doenerOrders[i] = new DoenerOrder(
+        bestellungen.clear();
+
+        for (int i = 0; i < 3; i++) {
+            DoenerOrder order = new DoenerOrder(
                     fleisch[toogoodtogo.nextInt(fleisch.length)],
                     brot[toogoodtogo.nextInt(brot.length)],
                     toogoodtogo.nextInt(3) + 1,
@@ -63,11 +69,11 @@ public class DoenerHub extends JFrame {
                     toogoodtogo.nextBoolean(),
                     toogoodtogo.nextBoolean()
             );
+            bestellungen.add(order);
         }
     }
 
-    //Berechnet den Gesamtpreis einer Bestellung.
-
+    // Berechnet den Gesamtpreis einer Bestellung.
     private int berechnePreis(DoenerOrder order) {
         int preis = DoenerPrice.BASIC_PREIS.getPreis();
 
@@ -78,6 +84,11 @@ public class DoenerHub extends JFrame {
         return preis * order.getAnzahl();
     }
 
+    /**
+     * Jeder Klick auf "Bestellen" erzeugt ein neues DoenerOrder-Objekt
+     * und speichert es in der Liste 'kundenBestellungen'.
+     * So kann der Kunde z.B. zwei unterschiedliche Bestellungen nacheinander erfassen.
+     */
     private void handleBestellen() {
         String fleisch = (String) fleischcomboBox2.getSelectedItem();
         String brot = (String) brotcomboBox1.getSelectedItem();
@@ -108,30 +119,46 @@ public class DoenerHub extends JFrame {
                 takeAwayCheckBox.isSelected()
         );
 
-        int preis = berechnePreis(order);
+        // Speichern: mehrere Bestellungen möglich
+        kundenBestellungen.add(order);
 
-        // Anzeige der Bestellung
-        bestellung.setText(
-                "BESTELLUNG\n" +
-                        order.getDetails() +
-                        "\nGesamtpreis: " + preis + " €"
-        );
+        // Anzeige: alle Kundenbestellungen + Gesamtsumme
+        displayKundenBestellungen();
     }
 
-    //Zeigt alle gespeicherten TooGoodToGo-Bestellungen an.
+    // Zeigt alle Kunden-Bestellungen in der TextArea 'bestellung' an.
+    private void displayKundenBestellungen() {
+        StringBuilder sb = new StringBuilder("Bestellung:\n");
 
+        int gesamt = 0;
+        for (int i = 0; i < kundenBestellungen.size(); i++) {
+            DoenerOrder order = kundenBestellungen.get(i);
+            int preis = berechnePreis(order);
+            gesamt += preis;
+
+            sb.append("BestellNr:").append(i + 1).append("\n");
+            sb.append(order.getDetails()).append("\n");
+            sb.append("Preis: ").append(preis).append(" €\n");
+        }
+
+        sb.append("GESAMTSUMME: ").append(gesamt).append(" €\n");
+
+        bestellung.setText(sb.toString());
+    }
+
+    // Zeigt alle gespeicherten TooGoodToGo-Bestellungen an.
     private void displayAllOrders() {
         StringBuilder sb = new StringBuilder("Too Good To Go:\n");
-        for (DoenerOrder o : doenerOrders) {
+        for (DoenerOrder o : bestellungen) {
             sb.append(o.getDetails()).append("\n");
         }
         toogoogtogotextArea1.setText(sb.toString());
     }
 
-    //Filtert alle glutenfreien Bestellungen und zeigt nur diese an.
+    // Filtert alle glutenfreien TooGoodToGo-Bestellungen und zeigt nur diese an.
     private void displayGlutenfreiOrders() {
         StringBuilder sb = new StringBuilder("Glutenfrei:\n");
-        for (DoenerOrder o : doenerOrders) {
+        for (DoenerOrder o : bestellungen) {
             if (o.isGlutenfrei()) {
                 sb.append(o.getDetails()).append("\n");
             }
@@ -139,7 +166,7 @@ public class DoenerHub extends JFrame {
         toogoogtogotextArea1.setText(sb.toString());
     }
 
-    //Setzt alle Eingabefelder zurück.
+    // Setzt alle Eingabefelder zurück.
     private void resetFields() {
         fleischcomboBox2.setSelectedIndex(0);
         brotcomboBox1.setSelectedIndex(0);
@@ -149,9 +176,10 @@ public class DoenerHub extends JFrame {
         rotkohlCheckBox.setSelected(false);
         zwiebelnCheckBox.setSelected(false);
         takeAwayCheckBox.setSelected(false);
-        bestellung.setText("");
-    }
 
+        // ❗ bestellung NICHT löschen, damit man mehrere Bestellungen sehen kann
+        // bestellung.setText("");
+    }
 
     public static void main(String[] args) {
         new DoenerHub();

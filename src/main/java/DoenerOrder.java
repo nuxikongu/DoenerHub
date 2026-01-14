@@ -48,13 +48,11 @@ public class DoenerOrder {
     }
     //hier liefert eine Beschreibung der Besstellung
     public String getDetails(){
-        return "Fleisch: " + fleisch + ", Anzahl: "+ anzahl+
-                ", Topping: "+
+        return "Fleisch: " + fleisch+ ", Topping: "+
                 (tomaten ? "Tomaten": "")+
                 (rotkohl ? "Rotkohl": "")+
                 (zwiebeln ? "Zwiebeln": "")+
                 ", Glutenfrei: "+ (glutenfrei ? "Ja": "Nein")+
-                ", Take Away: "+ (takeaway ? "Ja": "Nein");
-
+                ", Take Away: "+ (takeaway ? "Ja": "Nein")+ "\n" + "Anzahl: "+ anzahl;
     }
 }
