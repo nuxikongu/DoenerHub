@@ -14,10 +14,12 @@ class DoenerHub {
 - JButton filternButton
 - JTextField anzahltextField1
 - JCheckBox takeAwayCheckBox
-- DoenerOrder[] doenerOrders
+- ArrayList<DoenerOrder> bestellungen
+- ArrayList<DoenerOrder> kundenBestellungen
 - void initObjekt()
 - int berechnePreis(DoenerOrder)
 - void handleBestellen()
+- void displayKundenBestellungen()
 - void displayAllOrders()
 - void displayGlutenfreiOrders()
 - void resetFields()
@@ -53,6 +55,12 @@ class DoenerOrder {
 + String getDetails()
 }
 
+
+class DoenerOrderTest {
+~ void testGetDetailsNotEmpty()
+~ void testAnzahlIsCorrect()
+~ void testGlutenfreiFlag()
+}
 
 
 

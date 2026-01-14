@@ -19,10 +19,10 @@ public class DoenerHub extends JFrame {
     private JTextField anzahltextField1;
     private JCheckBox takeAwayCheckBox;
 
-    // Liste für TooGoodToGo-Bestellungen (genau 3 Objekte beim Start)
+    // Liste für TooGoodToGo-Bestellungen
     private ArrayList<DoenerOrder> bestellungen = new ArrayList<>();
 
-    // Kunden-Bestellungen: mehrere Bestellungen möglich (z.B. 2 unterschiedliche)
+    // Mehrere Bestellungen möglich
     private ArrayList<DoenerOrder> kundenBestellungen = new ArrayList<>();
 
     public DoenerHub() {
@@ -36,7 +36,7 @@ public class DoenerHub extends JFrame {
         // Erzeugt 3 zufällige TooGoodToGo-Objekte
         initObjekt();
 
-        // Zeigt alle Start-Bestellungen an
+        // Zeigt alle Bestellungen an
         displayAllOrders();
 
         // ActionListener für Buttons
@@ -87,14 +87,13 @@ public class DoenerHub extends JFrame {
     /**
      * Jeder Klick auf "Bestellen" erzeugt ein neues DoenerOrder-Objekt
      * und speichert es in der Liste 'kundenBestellungen'.
-     * So kann der Kunde z.B. zwei unterschiedliche Bestellungen nacheinander erfassen.
      */
     private void handleBestellen() {
         String fleisch = (String) fleischcomboBox2.getSelectedItem();
         String brot = (String) brotcomboBox1.getSelectedItem();
         String text = anzahltextField1.getText();
 
-        // Prüfung auf leere Eingabe
+        // Kontrolliert leere oder ungültige Anzahl
         if (text.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Bitte Anzahl eingeben!");
             return;
@@ -166,7 +165,7 @@ public class DoenerHub extends JFrame {
         toogoogtogotextArea1.setText(sb.toString());
     }
 
-    // Setzt alle Eingabefelder zurück.
+    // Setzt alle zurück.
     private void resetFields() {
         fleischcomboBox2.setSelectedIndex(0);
         brotcomboBox1.setSelectedIndex(0);
@@ -177,8 +176,6 @@ public class DoenerHub extends JFrame {
         zwiebelnCheckBox.setSelected(false);
         takeAwayCheckBox.setSelected(false);
 
-        // ❗ bestellung NICHT löschen, damit man mehrere Bestellungen sehen kann
-        // bestellung.setText("");
     }
 
     public static void main(String[] args) {
