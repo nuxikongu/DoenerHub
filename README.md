@@ -30,5 +30,14 @@ um sicherzustellen, dass eine gültige Textausgabe erzeugt wird.
 ## 6. Start des Programms
 Starten Sie die Anwendung über die `main`-Methode der Klasse `DoenerHub`.
 
-## 7. Autoren
+## 7. Verwendete Quellen & Tools
+  Entwicklungs- und Präsentationstools
+- Canva (Erstellung der Präsentationsslides)
+- Runway (verwendet und evaluiert, jedoch aufgrund nicht erfüllter Projektanforderungen nicht final eingesetzt)
+- Powtoon (verwendet und evaluiert, jedoch aufgrund nicht erfüllter Projektanforderungen nicht final eingesetzt)
+- Simpleshow (verwendet und evaluiert, jedoch aufgrund nicht erfüllter Projektanforderungen nicht final eingesetzt)
+- ChatGPT 5.0 : textuelle Ausarbeitung von Präsentationsinhalten und Bildbearbeitung
+- Gemini 3.0  : textuelle Ausarbeitung von Präsentationsinhalten und Bildbearbeitung
+  
+## 8. Autoren
 - [Thu Luong, Mehmet]
