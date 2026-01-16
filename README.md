@@ -32,11 +32,11 @@ Starten Sie die Anwendung über die `main`-Methode der Klasse `DoenerHub`.
 
 ## 7. Projektvideos
 Im Rahmen der Projektarbeit wurden mehrere Videos erstellt, um unterschiedliche Aspekte des Projekts zu demonstrieren:
-- **GUI-Demonstrationsvideo**  
+- **GUI-Demonstrationsvideo** (https://youtu.be/eGGQ3GVcmDM)
   Zeigt die Nutzung der grafischen Benutzeroberfläche sowie das Erstellen und Verwalten von Bestellungen.
-- **Projektpräsentationsvideo**  
+- **Projektpräsentationsvideo** (https://youtu.be/kfG4RP3DZ9k)
   Erläutert die Projektidee, den Aufbau der Anwendung, die Klassenstruktur (inkl. UML) und die technische Umsetzung.
-- **(Bonus)Konzeptuelles Werbevideo**  
+- **(Bonus)Konzeptuelles Werbevideo** (https://youtu.be/BbNdX1egbxA) 
   Kreatives Zusatzvideo zur Darstellung des Projekts als potenzielles Produkt bzw. Anwendungsszenario.
 
 ## 8. Verwendete Quellen & Tools
